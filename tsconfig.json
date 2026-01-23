@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist",
+        "module": "ESNext",
+        "target": "ESNext",
+        "moduleResolution": "bundler",
+        "lib": [
+            "ESNext",
+            "DOM"
+        ],
+        "sourceMap": true,
+        "declaration": true,
+        "declarationMap": true,
+        "noEmit": false,
+        "strict": true,
+        "verbatimModuleSyntax": true,
+        "isolatedModules": true,
+        "skipLibCheck": true,
+        "allowJs": false,
+        "checkJs": false,
+        "tsBuildInfoFile": "node_modules/.tsbubildinfo",
+        "incremental": true
+    },
+    "include": [
+        "src/**/*",
+    ],
+    "exclude": [
+        "tests/"
+    ]
+}

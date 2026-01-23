@@ -1,0 +1,61 @@
+{
+    "name": "eslint-plugin-phosphor-svelte",
+    "version": "0.1.0",
+    "private": true,
+    "license": "Apache-2.0",
+    "author": {
+        "name": "concertypin",
+        "url": "https://github.com/concertypin"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/concertypin/eslint-plugin-phosphor-svelte.git"
+    },
+    "keywords": [
+        "eslint",
+        "eslint-plugin",
+        "svelte",
+        "phosphor"
+    ],
+    "engines": {
+        "node": ">=22"
+    },
+    "type": "module",
+    "main": "dist/index.js",
+    "exports": "./dist/index.js",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "postinstall": "node --experimental-strip-types scripts/postinstall.ts",
+        "format": "prettier --write --list-different --cache --cache-location ./node_modules/.cache/prettier/ .",
+        "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint/ .",
+        "test": "vitest run --coverage"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.39.2",
+        "@types/eslint": "^9.6.1",
+        "@types/node": "^25.0.10",
+        "@typescript-eslint/rule-tester": "^8.53.1",
+        "@vitest/coverage-v8": "^4.0.18",
+        "cross-env": "^10.1.0",
+        "eslint": "^9.39.2",
+        "eslint-config-prettier": "^10.1.8",
+        "eslint-plugin-prettier": "^5.5.5",
+        "lint-staged": "^16.2.7",
+        "prettier": "^3.8.1",
+        "simple-git-hooks": "^2.13.1",
+        "typescript": "^5.9.3",
+        "typescript-eslint": "^8.53.1",
+        "vite": "^7.3.1",
+        "vitest": "^4.0.18"
+    },
+    "packageManager": "pnpm@10.16.1+sha512.0e155aa2629db8672b49e8475da6226aa4bdea85fdcdfdc15350874946d4f3c91faaf64cbdc4a5d1ab8002f473d5c3fcedcd197989cf0390f9badd3c04678706",
+    "peerDependencies": {
+        "eslint": "^8.0.0 || ^9.0.0"
+    },
+    "dependencies": {
+        "@typescript-eslint/utils": "^8.53.1"
+    }
+}
