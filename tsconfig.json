@@ -18,11 +18,11 @@
         "skipLibCheck": true,
         "allowJs": false,
         "checkJs": false,
-        "tsBuildInfoFile": "node_modules/.tsbubildinfo",
+        "tsBuildInfoFile": "node_modules/.tsbuildinfo",
         "incremental": true
     },
     "include": [
-        "src/**/*",
+        "src/**/*"
     ],
     "exclude": [
         "tests/"
