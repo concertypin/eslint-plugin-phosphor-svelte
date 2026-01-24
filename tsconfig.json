@@ -1,31 +1,14 @@
 {
-    "compilerOptions": {
-        "outDir": "./dist",
-        "module": "ESNext",
-        "target": "ESNext",
-        "moduleResolution": "bundler",
-        "lib": [
-            "ESNext",
-            "DOM"
-        ],
-        "sourceMap": true,
-        "declaration": true,
-        "declarationMap": true,
-        "noEmit": false,
-        "strict": true,
-        "verbatimModuleSyntax": true,
-        "isolatedModules": true,
-        "skipLibCheck": true,
-        "allowJs": false,
-        "checkJs": false,
-        "tsBuildInfoFile": "node_modules/.tsbuildinfo",
-        "incremental": true
-    },
-    "include": [
-        "src/**/*"
+    "references": [
+        {
+            "path": "./tsconfig.app.json"
+        },
+        {
+            "path": "./tsconfig.test.json"
+        },
+        {
+            "path": "./tsconfig.node.json"
+        }
     ],
-    "exclude": [
-        "tests/",
-        "dist/"
-    ]
+    "files": []
 }

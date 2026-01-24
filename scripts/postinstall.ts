@@ -2,7 +2,6 @@
 /**
  * @fileoverview Post-install script to set up git hooks using simple-git-hooks.
  */
-
 import { exec, spawn } from "child_process";
 import { promisify } from "util";
 

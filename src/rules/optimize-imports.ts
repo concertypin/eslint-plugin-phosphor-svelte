@@ -1,10 +1,16 @@
-import { TSESLint, TSESTree } from "@typescript-eslint/utils";
+import { AST_NODE_TYPES } from "@typescript-eslint/utils";
 
-const rule: TSESLint.RuleModule<"optimizeImports" | "noDynamicImport", []> = {
+import { createRule } from "@/utils";
+
+export const rule = createRule({
+    name: "optimize-imports",
     meta: {
         type: "suggestion",
         docs: {
-            description: "Optimize phosphor-svelte imports",
+            requiresTypeChecking: false,
+            recommended: true,
+            url: "https://github.com/haruaki07/phosphor-svelte",
+            description: "Avoid importing the entire 'phosphor-svelte' library.",
         },
         fixable: "code",
         schema: [],
@@ -12,7 +18,7 @@ const rule: TSESLint.RuleModule<"optimizeImports" | "noDynamicImport", []> = {
             optimizeImports:
                 "Import from 'phosphor-svelte' should be optimized to specific file imports.",
             noDynamicImport:
-                "Dynamic import of 'phosphor-svelte' is detected. This prevents tree-shaking.",
+                "Dynamic import of 'phosphor-svelte' is unrecommended, since it imports the entire library and slows down auto-completion.",
         },
     },
     defaultOptions: [],
@@ -24,7 +30,9 @@ const rule: TSESLint.RuleModule<"optimizeImports" | "noDynamicImport", []> = {
                 }
 
                 // Check if there are any specifiers that are not named imports
-                const hasNonNamed = node.specifiers.some((s) => s.type !== "ImportSpecifier");
+                const hasNonNamed = node.specifiers.some(
+                    (s) => s.type !== AST_NODE_TYPES.ImportSpecifier,
+                );
 
                 // If there are default or namespace imports, ignore.
                 if (hasNonNamed) {
@@ -40,9 +48,12 @@ const rule: TSESLint.RuleModule<"optimizeImports" | "noDynamicImport", []> = {
                     messageId: "optimizeImports",
                     fix(fixer) {
                         const newImports = node.specifiers.map((specifier) => {
-                            const importSpec = specifier as TSESTree.ImportSpecifier;
+                            // Type assertion is safe because hasNonNamed check ensures all are ImportSpecifiers
+                            const importSpec = specifier as typeof specifier & {
+                                type: AST_NODE_TYPES.ImportSpecifier;
+                            };
                             const importedName =
-                                importSpec.imported.type === "Identifier"
+                                importSpec.imported.type === AST_NODE_TYPES.Identifier
                                     ? importSpec.imported.name
                                     : importSpec.imported.value;
                             const localName = importSpec.local.name;
@@ -55,7 +66,10 @@ const rule: TSESLint.RuleModule<"optimizeImports" | "noDynamicImport", []> = {
                 });
             },
             ImportExpression(node) {
-                if (node.source.type === "Literal" && node.source.value === "phosphor-svelte") {
+                if (
+                    node.source.type === AST_NODE_TYPES.Literal &&
+                    node.source.value === "phosphor-svelte"
+                ) {
                     context.report({
                         node,
                         messageId: "noDynamicImport",
@@ -64,6 +78,4 @@ const rule: TSESLint.RuleModule<"optimizeImports" | "noDynamicImport", []> = {
             },
         };
     },
-};
-
-export default rule;
+});

@@ -1,15 +1,21 @@
 import { RuleTester } from "@typescript-eslint/rule-tester";
-import rule from "../src/rules/optimize-imports.js";
 import { describe } from "vitest";
 
-const ruleTester = new RuleTester({
-    languageOptions: {
-        parserOptions: {
-            ecmaVersion: 2020,
-            sourceType: "module",
+// Import module with augmentation to ensure types are loaded
+import "@/index";
+import { rule } from "@/rules/optimize-imports";
+
+const ruleTester = new RuleTester(
+    // Type assertion needed because module augmentation doesn't apply in test context
+    {
+        languageOptions: {
+            parserOptions: {
+                ecmaVersion: 2020,
+                sourceType: "module",
+            },
         },
-    },
-});
+    } as unknown as ConstructorParameters<typeof RuleTester>[0],
+);
 
 describe("optimize-imports", () => {
     ruleTester.run("optimize-imports", rule, {

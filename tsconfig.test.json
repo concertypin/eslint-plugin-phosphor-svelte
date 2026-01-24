@@ -1,0 +1,9 @@
+{
+    "extends": "./tsconfig.app.json",
+    "compilerOptions": {
+        "tsBuildInfoFile": "node_modules/.test.tsbuildinfo"
+    },
+    "include": ["tests/**/*.ts", "tests/*.ts", "src/**/*.ts", "src/*.ts", "package.json"],
+    "exclude": ["dist/"],
+    "references": []
+}
