@@ -1,5 +1,8 @@
 {
-    "plugins": ["@trivago/prettier-plugin-sort-imports"],
+    "$schema": "https://www.schemastore.org/prettierrc.json",
+    "plugins": [
+        "@trivago/prettier-plugin-sort-imports"
+    ],
     "printWidth": 100,
     "tabWidth": 4,
     "useTabs": false,
@@ -9,13 +12,19 @@
     "endOfLine": "lf",
     "overrides": [
         {
-            "files": [".github/workflows/*"],
+            "files": [
+                ".github/workflows/*"
+            ],
             "options": {
                 "tabWidth": 2
             }
         }
     ],
-    "importOrder": ["<BUILTIN_MODULES>", "<THIRD_PARTY_MODULES>", "^@/(.*)$"],
+    "importOrder": [
+        "<BUILTIN_MODULES>",
+        "<THIRD_PARTY_MODULES>",
+        "^@/(.*)$"
+    ],
     "importOrderSeparation": true,
     "importOrderSortSpecifiers": true
 }

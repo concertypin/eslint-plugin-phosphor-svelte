@@ -38,7 +38,7 @@ const alias: UserConfig["resolve"]["alias"] = {
 };
 export default defineConfig({
     test,
-    plugins: [dts({ tsconfigPath: "./tsconfig.app.json", outDir: "dist", entryRoot: "src" })],
+    plugins: [dts({ tsconfigPath: "./tsconfig.app.json", outDirs: "dist", entryRoot: "src" })],
     resolve: { alias },
     build: {
         lib: {

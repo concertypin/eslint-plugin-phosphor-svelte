@@ -12,7 +12,6 @@ async function simpleGitHooksSetup(): Promise<number> {
     }
     const result = spawn("pnpm", ["exec", "simple-git-hooks"], {
         stdio: ["ignore", "ignore", "ignore"],
-        shell: true,
     });
     return new Promise((resolve) => {
         result.on("close", (code) => {
