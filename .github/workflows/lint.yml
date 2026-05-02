@@ -1,11 +1,30 @@
 name: Lint
 permissions:
   contents: read
+  statuses: write
 
 on:
   pull_request:
+  workflow_dispatch:
 
 jobs:
+  eslint-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: "package.json"
+
+      - name: Build ESLint version matrix
+        id: matrix
+        run: node scripts/eslint-version-matrix.ts
+
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -33,6 +52,9 @@ jobs:
 
       - name: Run test
         run: pnpm test --coverage.reporter=json-summary
+
+      - name: Run build
+        run: pnpm build
 
       - name: Update Coverage Status
         if: github.event_name == 'pull_request'
@@ -65,3 +87,36 @@ jobs:
               description: description, // e.g. "Lines: 85%"
               target_url: `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}` // Click to see details
             });
+
+  eslint-compatibility:
+    needs: eslint-matrix
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.eslint-matrix.outputs.matrix) }}
+    name: ESLint Compatibility / ESLint ${{ matrix.eslint }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          package_json_file: "package.json"
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: "package.json"
+          cache: "pnpm"
+          cache-dependency-path: "pnpm-lock.yaml"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install ESLint compatibility version
+        run: pnpm add -D eslint@${{ matrix.eslint }} @eslint/js@${{ matrix.eslintJs }} --ignore-scripts
+
+      - name: Run ESLint compatibility test
+        run: pnpm exec vitest run tests/eslint-compat.test.ts --typecheck.enabled=true

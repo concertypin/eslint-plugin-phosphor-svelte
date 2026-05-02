@@ -1,4 +1,3 @@
-/// <reference types="node" />
 /**
  * @fileoverview Post-install script to set up git hooks using simple-git-hooks.
  */

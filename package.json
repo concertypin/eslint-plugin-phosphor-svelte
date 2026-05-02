@@ -18,7 +18,7 @@
         "phosphor"
     ],
     "engines": {
-        "node": ">=22"
+        "node": ">=22.18.0 <23.0.0 || >=23.6.0"
     },
     "type": "module",
     "main": "dist/index.js",
@@ -38,31 +38,31 @@
         "test": "vitest run --coverage",
         "check": "pnpm run format && pnpm run lint && pnpm run test"
     },
+    "peerDependencies": {
+        "eslint": ">=9.39.0 <11"
+    },
+    "dependencies": {
+        "@typescript-eslint/utils": "^8.59.1"
+    },
     "devDependencies": {
-        "@eslint/js": "^9.39.2",
+        "@eslint/js": "^10.0.1",
         "@trivago/prettier-plugin-sort-imports": "^6.0.2",
         "@types/eslint": "^9.6.1",
         "@types/node": "^25.0.10",
-        "@typescript-eslint/rule-tester": "^8.53.1",
+        "@typescript-eslint/rule-tester": "^8.59.1",
         "@vitest/coverage-v8": "^4.0.18",
         "cross-env": "^10.1.0",
-        "eslint": "^9.39.2",
+        "eslint": "^10.3.0",
         "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-prettier": "^5.5.5",
         "lint-staged": "^16.2.7",
         "prettier": "^3.8.1",
         "simple-git-hooks": "^2.13.1",
         "typescript": "^5.9.3",
-        "typescript-eslint": "^8.53.1",
+        "typescript-eslint": "^8.59.1",
         "vite": "^7.3.1",
         "vite-plugin-dts": "^4.5.4",
         "vitest": "^4.0.18"
     },
-    "packageManager": "pnpm@10.16.1+sha512.0e155aa2629db8672b49e8475da6226aa4bdea85fdcdfdc15350874946d4f3c91faaf64cbdc4a5d1ab8002f473d5c3fcedcd197989cf0390f9badd3c04678706",
-    "peerDependencies": {
-        "eslint": "^9.0.0"
-    },
-    "dependencies": {
-        "@typescript-eslint/utils": "^8.53.1"
-    }
+    "packageManager": "pnpm@10.33.2+sha512.a90faf6feeab71ad6c6e57f94e0fe1a12f5dcc22cd754db40ae9593eb6a3e0b6b12e3540218bb37ae083404b1f2ce6db2a4121e979829b4aff94b99f49da1cf8"
 }

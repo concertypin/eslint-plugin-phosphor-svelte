@@ -24,6 +24,15 @@ export default defineConfig(
     eslintPluginPrettierRecommended,
     eslintConfigPrettier,
     {
+        files: ["scripts/eslint-version-matrix.ts"],
+        languageOptions: {
+            globals: {
+                console: "readonly",
+                fetch: "readonly",
+            },
+        },
+    },
+    {
         rules: {
             "prettier/prettier": "warn",
         },

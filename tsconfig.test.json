@@ -3,7 +3,14 @@
     "compilerOptions": {
         "tsBuildInfoFile": "node_modules/.test.tsbuildinfo"
     },
-    "include": ["tests/**/*.ts", "tests/*.ts", "src/**/*.ts", "src/*.ts", "package.json"],
+    "include": [
+        "tests/**/*.ts",
+        "tests/*.ts",
+        "src/**/*.ts",
+        "src/*.ts",
+        "package.json",
+        "scripts/eslint-version-matrix.ts"
+    ],
     "exclude": ["dist/"],
     "references": []
 }

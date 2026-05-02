@@ -4,6 +4,6 @@
         "tsBuildInfoFile": "node_modules/.common.tsbuildinfo",
         "types": ["node", "vite/client"]
     },
-    "include": ["./*.js", "./*.ts", "scripts/**/*.ts"],
+    "include": ["./*.js", "./*.ts", "scripts/**/*.ts", "scripts/*.ts"],
     "exclude": ["tests/", "dist/", "src/"]
 }
